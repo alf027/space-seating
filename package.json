@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/alf027/space-seating",
   "dependencies": {
+    "bcrypt": "^0.8.3",
     "mime": "^1.3.4",
     "monk": "^1.0.1",
     "mustache": "^2.1.2",
+    "node-session": "0.0.1-alpha.2",
     "qs": "^4.0.0",
     "routes": "^2.1.0"
   }
