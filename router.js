@@ -102,4 +102,17 @@ routes.addRoute('/login', function (req, res, url) {
   }
 });
 
+routes.addRoute('/public/*', function (req, res, url) {
+  console.log('public');
+  res.setHeader('Content-Type', mime.lookup(req.url));
+  fs.readFile('.' + req.url, function (err, file) {
+    if (err) {
+      res.end('404');
+    } else {
+      res.end(file)
+    }
+
+  })
+});
+
 module.exports = routes;
