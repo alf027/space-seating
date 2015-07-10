@@ -8,12 +8,36 @@
 <section>
     <table class='indexPg' id="table">
         <tbody>
-        <tr class='row1'>
-            {{#seats}}
+        {{#seats}}
 
-            <td class="seat" id="{{seatId}}">{{seatId}}</td>
-            {{/seats}}
+        <tr class="row1" id="{{_id}}">
+            {{#row1}}
+            <td class="seat" id="{{seatId}}">
+                <form action="/home/{{_id}}/{{seatId}}" method="post"><button type="submit"></button>Sit Here</form>{{occupant}}</td>
+            {{/row1}}
         </tr>
+
+        <tr class="row2">
+            {{#row2}}
+            <td class="seat" id="{{seatId}}"><form action="/home/{{_id}}/{{seatId}}" method="post"><button type="submit"></button>Sit Here</form>{{occupant}}</td>
+            {{/row2}}
+        </tr>
+        <tr class="row3">
+            {{#row3}}
+            <td class="seat" id="{{seatId}}"><form action="/home/{{_id}}/{{seatId}}" method="post"><button type="submit"></button>Sit Here</form>{{occupant}}</td>
+            {{/row3}}
+        </tr>
+        <tr class="row4">
+            {{#row4}}
+            <td class="seat" id="{{seatId}}"><form action="/home/{{_id}}/{{seatId}}" method="post"><button type="submit"></button>Sit Here</form>{{occupant}}</td>
+            {{/row4}}
+        </tr>
+
+
+
+
+       {{/seats}}
+
         </tbody>
     </table>
 </section>

@@ -13,13 +13,13 @@ var routes = require('routes')(),
 
 routes.addRoute('/', function (req, res, url) {
 
-  if(req.session.get('email')) {
+  if (req.session.get('email')) {
     console.log(req.session.get('email'));
-    seats.find({},function(err,docs) {
+    seats.find({}, function (err, docs) {
       //if(err) {
       //  res.end('404');
       //}
-      var template = view.render('/index',{seats:docs});
+      var template = view.render('/index', {seats: docs});
       res.end(template);
     });
 
@@ -100,6 +100,50 @@ routes.addRoute('/login', function (req, res, url) {
       });
     });
   }
+});
+
+routes.addRoute('/home/:id/:seatId', function (req, res, url) {
+  console.log(url.route);
+  res.setHeader('Content-Type', 'text/html');
+  var rowId = url.params.id;
+  var seatId = url.params.seatId;
+    var email = req.session.get('email')
+
+  if (req.method === 'POST') {
+    console.log(rowId);
+    console.log(seatId);
+    console.log(req.session.get('email'));
+
+    seats.findOne({_id: rowId},function (err, doc) {
+      console.log('MONGOOOOOOOOSE');
+      console.log(doc.row1[seatId-1]);
+
+      doc.row1[seatId-1].occupant = email;
+      console.log(doc.row1[seatId-1].occupant);
+
+      seats.update({_id: rowId}, doc, function(err,doc){
+        console.log(err);
+        console.log(doc);
+      })
+    });
+
+      //if (err) console.log(err);
+
+      res.end()
+
+
+    //seats.update({_id: rowId, 'seatId':seatId}, {'occupant':email} ,function (err, doc) {
+    //  console.log('MONGOOOOOOOOSE');
+    //  console.log(doc);
+    //  if (err) console.log(err);
+    //  res.writeHead(302, {'Location': '/bands/'});
+    //
+    //  res.end()
+    //});
+
+  }
+
+
 });
 
 routes.addRoute('/public/*', function (req, res, url) {
