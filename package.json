@@ -1,0 +1,19 @@
+{
+  "name": "space-seating",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alf027/space-seating.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alf027/space-seating/issues"
+  },
+  "homepage": "https://github.com/alf027/space-seating"
+}
