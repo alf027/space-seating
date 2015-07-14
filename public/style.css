@@ -1,0 +1,62 @@
+*,*:before, *:after {
+    box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: white;
+}
+
+body {
+    background: url(http://amzwall.com/wp-content/uploads/2015/02/Space-Picture-Desktop.jpg);
+    padding: 2em;
+    text-align: center;
+    margin: 0 auto;
+}
+section, table, tr, td {
+  margin: 40px auto;
+}
+
+button {
+  border: none;
+  background: transparent;
+  height: 100px;
+  width: 100px;
+  margin: 1em;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+form {
+    margin: 1em;
+}
+
+h1 {
+  font-size: 50px;
+  text-decoration: underline;
+}
+
+.homenav {
+  border-radius: 5px;
+  border: 1px solid black;
+  height: 30px;
+  width: 60px;
+  background: white;
+}
+
+.seat {
+  margin: 100px;
+  border: 3px solid white;
+  background: tan;
+  border-radius: 50%;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: green;
+}

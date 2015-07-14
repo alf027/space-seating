@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/public/style.css">
   <title></title>
 </head>
 <body>
+  LOGIN:
   <form id='form' action="/login" method="POST">
     <label for="email">Email</label>
     <input id="email" type="email" name="email" value="">
@@ -13,6 +15,11 @@
     <input id="password" type="password" name="password">
 
     <input type="submit" value="Log In">
+  </form>
+
+  <form action="/register" method="GET">
+    <label for="register">Don't have an account? Click here to register </label>
+    <input type="submit" id="register" value="Register">
   </form>
 </body>
 </html>

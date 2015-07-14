@@ -63,6 +63,7 @@ routes.addRoute('/register', function (req, res, url) {
           return
         }
         req.session.put('email', doc.email);
+        req.session.put('imgUrl', doc.imgUrl);
         res.writeHead(302, {'Location': '/'});
         res.end()
       })
@@ -90,6 +91,7 @@ routes.addRoute('/login', function (req, res, url) {
         if (doc) {
           if (bcrypt.compareSync(user.password, doc.password)) {
             req.session.put('email', doc.email);
+            req.session.put('imgUrl', doc.imgUrl);
             res.writeHead(302, {'Location': '/'});
             res.end();
           } else {
@@ -102,34 +104,87 @@ routes.addRoute('/login', function (req, res, url) {
   }
 });
 
-routes.addRoute('/home/:id/:seatId', function (req, res, url) {
+routes.addRoute('/home/:id/:seatId/delete', function (req, res, url) {
   console.log(url.route);
   res.setHeader('Content-Type', 'text/html');
   var rowId = url.params.id;
   var seatId = url.params.seatId;
-    var email = req.session.get('email')
+  var email = req.session.get('email');
 
-  if (req.method === 'POST') {
+  console.log('delete');
+  if (req.method === 'GET') {
     console.log(rowId);
     console.log(seatId);
     console.log(req.session.get('email'));
+    if(seatId < 8) {
+      seats.findOne({_id: rowId}, function (err, doc) {
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row1[seatId - 1]);
 
-    seats.findOne({_id: rowId},function (err, doc) {
-      console.log('MONGOOOOOOOOSE');
-      console.log(doc.row1[seatId-1]);
+        doc.row1[seatId - 1].occupant = '';
 
-      doc.row1[seatId-1].occupant = email;
-      console.log(doc.row1[seatId-1].occupant);
+        console.log(doc.row1[seatId - 1].occupant);
 
-      seats.update({_id: rowId}, doc, function(err,doc){
-        console.log(err);
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+    if(seatId <15 && seatId > 7) {
+      seats.findOne({_id: rowId}, function (err, doc) {
         console.log(doc);
-      })
-    });
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row2[seatId - 8]);
 
-      //if (err) console.log(err);
+        doc.row2[seatId - 8].occupant = '';
+        console.log(doc.row2[seatId - 8].occupant);
 
-      res.end()
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+
+    if(seatId <22 && seatId >14) {
+      seats.findOne({_id: rowId}, function (err, doc) {
+        console.log(doc);
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row3[seatId - 15]);
+
+        doc.row3[seatId - 15].occupant = '';
+        console.log(doc.row3[seatId - 15].occupant);
+
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+
+    if(seatId <29 && seatId >21) {
+      seats.findOne({_id: rowId}, function (err, doc) {
+        console.log(doc);
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row4[seatId - 22]);
+
+        doc.row4[seatId - 22].occupant = '';
+        console.log(doc.row4[seatId - 22].occupant);
+
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+
+
+
+    //if (err) console.log(err);
+    res.writeHead(302, {'Location': '/'});
+    res.end();
+
 
 
     //seats.update({_id: rowId, 'seatId':seatId}, {'occupant':email} ,function (err, doc) {
@@ -145,6 +200,111 @@ routes.addRoute('/home/:id/:seatId', function (req, res, url) {
 
 
 });
+
+routes.addRoute('/home/:id/:seatId', function (req, res, url) {
+  console.log(url.route);
+  res.setHeader('Content-Type', 'text/html');
+  var rowId = url.params.id;
+  var seatId = url.params.seatId;
+  var email = req.session.get('email');
+  var picture = req.session.get('imgUrl');
+  console.log(picture);
+
+  if (req.method === 'POST') {
+    console.log(rowId);
+    console.log(seatId);
+    console.log(req.session.get('email'));
+  if(seatId < 8) {
+    seats.findOne({_id: rowId}, function (err, doc) {
+      console.log('MONGOOOOOOOOSE');
+      console.log(doc.row1[seatId - 1]);
+
+      doc.row1[seatId - 1].occupant = email;
+
+      console.log(doc.row1[seatId - 1].occupant);
+
+      seats.update({_id: rowId}, doc, function (err, doc) {
+        console.log(err);
+        console.log(doc);
+      })
+    });
+  }
+    if(seatId <15 && seatId > 7) {
+      seats.findOne({_id: rowId}, function (err, doc) {
+        console.log(doc);
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row2[seatId - 8]);
+
+        doc.row2[seatId - 8].occupant = email;
+        console.log(doc.row2[seatId - 8].occupant);
+
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+
+    if(seatId <22 && seatId >14) {
+      seats.findOne({_id: rowId}, function (err, doc) {
+        console.log(doc);
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row3[seatId - 15]);
+
+        doc.row3[seatId - 15].occupant = email;
+        console.log(doc.row3[seatId - 15].occupant);
+
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+
+    if(seatId <29 && seatId >21) {
+      seats.findOne({_id: rowId}, function (err, doc) {
+        console.log(doc);
+        console.log('MONGOOOOOOOOSE');
+        console.log(doc.row4[seatId - 22]);
+
+        doc.row4[seatId - 22].occupant = email;
+        console.log(doc.row4[seatId - 22].occupant);
+
+        seats.update({_id: rowId}, doc, function (err, doc) {
+          console.log(err);
+          console.log(doc);
+        })
+      });
+    }
+
+
+
+      //if (err) console.log(err);
+    res.writeHead(302, {'Location': '/'});
+    res.end();
+
+
+
+    //seats.update({_id: rowId, 'seatId':seatId}, {'occupant':email} ,function (err, doc) {
+    //  console.log('MONGOOOOOOOOSE');
+    //  console.log(doc);
+    //  if (err) console.log(err);
+    //  res.writeHead(302, {'Location': '/bands/'});
+    //
+    //  res.end()
+    //});
+
+  }
+
+
+});
+
+routes.addRoute('/logout',function (req, res, url)  {
+  req.session.flush();
+  res.writeHead(302, {'Location': '/'});
+  res.end()
+
+})
 
 routes.addRoute('/public/*', function (req, res, url) {
   console.log('public');
